@@ -19,14 +19,18 @@ steps:
     displayName: "Build UI"
     inputs:
       targetType: "inline"
-      script: "npm run-script build"
+      script: "npm run build"
       workingDirectory: "pipeline-test-frontend"
+    env:
+      CI: true
   - task: Bash@3
     displayName: "Test UI"
     inputs:
       targetType: "inline"
       script: "npm test -- --coverage"
       workingDirectory: "pipeline-test-frontend"
+    env:
+      CI: true
   - task: DotNetCoreCLI@2
     displayName: "Build API"
     inputs:

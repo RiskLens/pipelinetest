@@ -7,9 +7,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: 'pipeline-test-frontend'
+  - script: echo Hello, world!
+    displayName: "Run a one-line script"
+  - task: Npm@1
+    displayName: "Install UI Dependencies"
+    inputs:
+      command: "install"
+      workingDir: "pipeline-test-frontend"
+  - task: Npm@1
+    displayName: "BUild UI"
+    inputs:
+      command: "run-script build"
+      workingDir: "pipeline-test-frontend"

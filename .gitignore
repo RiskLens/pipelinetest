@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/pipeline-test-frontend/node_modules
+/pipeline-test-frontend/.pnp
+/pipeline-test-frontend/.pnp.js
+
+# testing
+/pipeline-test-frontend/coverage
+
+# production
+/pipeline-test-frontend/build
+
+# misc
+/pipeline-test-frontend/.DS_Store
+/pipeline-test-frontend/.env.local
+/pipeline-test-frontend/.env.development.local
+/pipeline-test-frontend/.env.test.local
+/pipeline-test-frontend/.env.production.local
+
+/pipeline-test-frontend/npm-debug.log*
+/pipeline-test-frontend/yarn-debug.log*
+/pipeline-test-frontend/yarn-error.log*
+
+.vs/
+*.dbmdl
+**/logs/**.log
+
+## Build results
+
+# [Dd]ebug/
+# [Rr]elease/
+# x64/
+# build/
+[Bb]in/
+[Oo]bj/

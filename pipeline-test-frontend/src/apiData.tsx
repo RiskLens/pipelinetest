@@ -1,42 +1,24 @@
 import React, { useState, useEffect } from "react";
 
-type weather = {
+export type weather = {
   date: Date;
   temperatureC: number;
   summary: string;
 };
 
 const ApiData: React.FC = () => {
-  const [error, setError] = useState<Error | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState<weather[]>([]);
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
+  async function fetchData() {
+    const response = await fetch("https://localhost:44365/weatherforecast");
+    setItems(await response.json());
+  }
+
   useEffect(() => {
-    fetch("https://localhost:44365/weatherforecast")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    fetchData();
   }, []);
 
-  console.log(items);
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
+  if (!items) {
     return <div>Loading...</div>;
   } else {
     return (

@@ -9,3 +9,7 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'pipeline-test-frontend'

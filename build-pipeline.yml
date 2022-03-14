@@ -10,30 +10,47 @@ steps:
   - script: echo Hello, world!
     displayName: "Run a one-line script"
   - task: Bash@3
+    displayName: "Install UI Dependencies"
     inputs:
       targetType: "inline"
       script: "npm install"
       workingDirectory: "pipeline-test-frontend"
   - task: Bash@3
+    displayName: "Build UI"
     inputs:
       targetType: "inline"
       script: "npm run-script build"
       workingDirectory: "pipeline-test-frontend"
   - task: Bash@3
+    displayName: "Test UI"
     inputs:
       targetType: "inline"
       script: "npm run-script test"
       workingDirectory: "pipeline-test-frontend"
   - task: DotNetCoreCLI@2
+    displayName: "Build API"
     inputs:
       command: "build"
       projects: "**/*.csproj"
   - task: DotNetCoreCLI@2
+    displayName: "Test API"
     inputs:
       command: "test"
       projects: "**/*.csproj"
   - task: DotNetCoreCLI@2
+    displayName: "Publish API"
     inputs:
       command: "publish"
       publishWebProjects: false
       projects: "API/API.csproj"
+      arguments: "--output $(Build.ArtifactStagingDirectory)/API"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: "$(Pipeline.Workspace)/API/bin/Debug/netcoreapp3.1/publish"
+      artifact: "ui"
+      publishLocation: "pipeline"
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: "$(Build.ArtifactStagingDirectory)/API"
+      artifact: "api"
+      publishLocation: "pipeline"

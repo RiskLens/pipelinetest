@@ -9,13 +9,15 @@ pool:
 steps:
   - script: echo Hello, world!
     displayName: "Run a one-line script"
-  - task: Npm@1
-    displayName: "Install UI Dependencies"
+  - task: Bash@3
     inputs:
-      command: "install"
-      workingDir: "pipeline-test-frontend"
-  - task: Npm@1
-    displayName: "BUild UI"
+      targetType: "inline"
+      script: "npm install"
+      workingDirectory: "pipeline-test-frontend"
+      failOnStderr: true
+  - task: Bash@3
     inputs:
-      command: "run-script build"
-      workingDir: "pipeline-test-frontend"
+      targetType: "inline"
+      script: "npm run-script build"
+      workingDirectory: "pipeline-test-frontend"
+      failOnStderr: true

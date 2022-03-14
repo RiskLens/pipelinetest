@@ -50,7 +50,7 @@ steps:
       arguments: "--output $(Build.ArtifactStagingDirectory)/API"
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: "$(Pipeline.Workspace)/pipeline-test-frontend"
+      targetPath: "$(Build.SourcesDirectory)/pipeline-test-frontend/build"
       artifact: "ui"
       publishLocation: "pipeline"
   - task: PublishPipelineArtifact@1

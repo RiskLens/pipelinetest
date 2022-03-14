@@ -9,13 +9,6 @@
 - Publish an API artifact
 - Publish a UI artifact
 
-- Restore & Build API.csproj using dotnet build
-- Restore & Build pipeline-test-frontend using "npm install" and "npm run-script build"
-- Test dotnet projects using dotnet test
-- Test pipeline-test-frontend using "npm run-script test"
-- Publish API.csproj project as a pipeline artifact
-- Publish pipeline-test-frontend/build as a pipeline artifact
-
 ### Ideally
 
 - Pipeline fails when any project fails to build
